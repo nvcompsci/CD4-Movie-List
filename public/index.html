@@ -26,12 +26,13 @@
         document.querySelector("input[type='submit']")
             .onclick = submitMovie
             
-        function submitMovie() {
+        function submitMovie(e) {
             //alert()
-            const newMovie = document.querySelector("input[type='text']").value
+            e.preventDefault()
+            const newMovie = { name: document.querySelector("input[type='text']").value}
             let config = {
                 method: "POST",
-                body: newMovie
+                body: JSON.stringify( newMovie )
             }
             fetch("/movie",config)
         }

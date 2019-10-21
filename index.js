@@ -2,12 +2,14 @@
 const express = require("express")
 const app = express()
 
+app.use(express.json())
 app.use( express.static('public') )
 
 let movies = ["Star Wars Episode IV","Avengers","October Sky"]
 
-app.post("/movie", (req, res) =>  {
-    movies.push( req.body )
+app.post("/movie", (req, res, next) =>  {
+    console.log(req.body)
+    movies.push( req.body.name )
     console.log(movies)
     res.send(movies)
 })

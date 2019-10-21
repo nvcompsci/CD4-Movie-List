@@ -8,11 +8,33 @@
         </style>
     </head>
     <body>
-        <h1>Best Movies of All Time</h1>
+        <header><h1>Greatest Movies of All Time</h1></header>
+        <main>
         <ul>
             <li>Avengers</li>
             <li>Star Wars IV</li>
             <li>October Sky</li>
         </ul>
+        <form>
+            <label for="newMovie">What else?</label>
+            <input type="text" name="newMovie" />
+            <input type="submit" />
+        </form>
+            
+        </main>
+        <script>
+        document.querySelector("input[type='submit']")
+            .onclick = submitMovie
+            
+        function submitMovie() {
+            //alert()
+            const newMovie = document.querySelector("input[type='text']").value
+            let config = {
+                method: "POST",
+                body: newMovie
+            }
+            fetch("/movie",config)
+        }
+        </script>
     </body>
 </html>

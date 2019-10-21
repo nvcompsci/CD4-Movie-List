@@ -2,7 +2,15 @@
 const express = require("express")
 const app = express()
 
-let movies = ["Star Wars Episode IV","Anchorman"]
+app.use( express.static('public') )
+
+let movies = ["Star Wars Episode IV","Avengers","October Sky"]
+
+app.post("/movie", (req, res) =>  {
+    movies.push( req.body )
+    console.log(movies)
+    res.send(movies)
+})
 
 //Define callback function for GET request on route /hello
 app.get("/hello", (req, res) => {
@@ -16,4 +24,4 @@ app.get("/movies", (req, res) => {
 })
 
 //Start listening on port 3000, callback function
-app.listen(3000, () => console.log("Server started") )
+app.listen(80, () => console.log("Server started") )

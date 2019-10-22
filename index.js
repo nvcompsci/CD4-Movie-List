@@ -7,7 +7,7 @@ app.use( express.static('public') )
 
 let movies = ["Star Wars Episode IV","Avengers","October Sky"]
 
-app.post("/movie", (req, res, next) =>  {
+app.post("/movie", (req, res) =>  {
     console.log(req.body)
     movies.push( req.body.name )
     console.log(movies)

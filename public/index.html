@@ -5,9 +5,6 @@
             body {
                 background-color: darkcyan;
             }
-            li {
-                background-color:red;
-            }
         </style>
     </head>
     <body>
@@ -42,13 +39,15 @@
             }
             fetch("/movie",config)
                 .then( response => response.json() )
-                .then( body => {
-                    console.log(typeof body)
-                    let $list = document.querySelector("ul")
-                    let text = body.map( (movie) => `<li>${movie}</li>` ).join("")                    
-                    
-                    $list.innerHTML = text                
-            })
+                .then( body => {updateList(body)})
+                .catch(err => console.error(err))
+        }
+            
+        function updateList(movies) {            
+            let $list = document.querySelector("ul")
+            let text = movies.map( (movie) => `<li>${movie}</li>` ).join("")                    
+
+            $list.innerHTML = text 
         }
         </script>
     </body>

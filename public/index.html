@@ -23,6 +23,11 @@
             
         </main>
         <script>
+        fetch("/movies")
+            .then(response => response.json())
+            .then(body => updateList(body))
+            .catch(err => console.error(err))
+            
         document.querySelector("input[type='submit']")
             .onclick = submitMovie
             

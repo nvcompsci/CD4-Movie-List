@@ -9,6 +9,7 @@
     </head>
     <body>
         <header><h1>Greatest Movies of All Time</h1></header>
+        <a href="rating.html">Click Here to Rate Braveheart</a>
         <main>
         <ul>
             <li>Avengers</li>
@@ -52,7 +53,11 @@
             let $list = document.querySelector("ul")
             let text = movies.map( (movie) => `<li>${movie}</li>` ).join("")                    
 
-            $list.innerHTML = text 
+            $list.innerHTML = text
+            
+            //Calculate average here
+            
+            //Put average number on page
         }
         </script>
     </body>

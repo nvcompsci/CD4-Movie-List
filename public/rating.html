@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <title>Rate my Favorite Movie</title>
+        <style>
+            body {
+                background-color: darkcyan;
+            }
+            header {
+                border: 3px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Rate My Favorite Movie: Star Wars IV - A New Hope</h1>
+            <a href="index.html">Main Page</a>
+        </header>
+        <main>
+        <ul>
+        </ul>
+        <h4>Average Rating: <span id="avgRating"></span></h4>
+        <form>
+            <label for="rating">Rating (1-100)</label>
+            <input type="number" min=1 max=100 step=1 name="rating" />
+            <input type="submit" />
+        </form>
+            
+        </main>
+        <script>
+        fetch("/ratings")
+            .then(response => response.json())
+            .then(ratings => updateList(ratings))
+            .catch(err => console.error(err))
+            
+        document.querySelector("input[type='submit']")
+            .onclick = submitRating
+            
+        function submitRating(e) {
+            //alert()
+            e.preventDefault()
+            const rating = { value: parseInt(document.querySelector("input[name='rating']").value)}
+            let config = {
+                method: "POST",
+                body: JSON.stringify( rating ),
+                headers: {
+                    "Content-Type":"application/json"
+                }
+            }
+            fetch("/rating",config)
+                .then( response => response.json() )
+                .then( ratings => {updateList(ratings)})
+                .catch(err => console.error(err))
+        }
+            
+        function updateList(ratings) {            
+            let $list = document.querySelector("ul")
+            let text = ratings.map( (rating) => `<li>${rating}</li>` ).join("")                    
+
+            $list.innerHTML = text
+            
+            //Calculate average here
+            let sum = 0
+            for (let i = 0; i < ratings.length; i++) {
+                const rating = ratings[i]
+                sum += rating
+            }
+            const avg = sum / ratings.length
+            //Put average number on page
+            const $avgSpan = document.querySelector('span#avgRating')
+            $avgSpan.innerHTML = avg
+        }
+        </script>
+    </body>
+</html>

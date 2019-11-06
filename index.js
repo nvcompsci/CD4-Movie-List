@@ -6,6 +6,19 @@ app.use(express.json())
 app.use( express.static('public') )
 
 let movies = ["Star Wars Episode IV","Avengers","October Sky"]
+let ratings = []
+
+app.post("/rating", (req, res) =>  {
+    console.log(req.body.value)
+    ratings.push( req.body.value )
+    console.log(ratings)
+    res.send(ratings)
+})
+
+app.get("/ratings", (req, res) => {
+    console.log("GET on /ratings")
+    res.send(ratings)
+})
 
 app.post("/movie", (req, res) =>  {
     console.log(req.body)
